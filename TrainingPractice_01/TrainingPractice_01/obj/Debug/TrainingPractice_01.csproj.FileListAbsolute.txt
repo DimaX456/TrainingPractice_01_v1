@@ -1,0 +1,8 @@
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\obj\Debug\TrainingPractice_01.csproj.AssemblyReference.cache
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\obj\Debug\TrainingPractice_01.csproj.SuggestedBindingRedirects.cache
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\obj\Debug\TrainingPractice_01.csproj.CoreCompileInputs.cache
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\bin\Debug\TrainingPractice_01.exe.config
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\bin\Debug\TrainingPractice_01.exe
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\bin\Debug\TrainingPractice_01.pdb
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\obj\Debug\TrainingPractice_01.exe
+C:\TrainingPractice_01\TrainingPractice_01\TrainingPractice_01\obj\Debug\TrainingPractice_01.pdb
