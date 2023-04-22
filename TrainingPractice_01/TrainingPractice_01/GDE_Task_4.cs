@@ -118,7 +118,7 @@ namespace TrainingPractice_01
         //                default:
         //                    Console.WriteLine($"\nВам незнакомо {castspell} это заклинание");
         //                    break;
-        //            }   
+        //            }
         //        }
         //        Console.ReadKey();
         //    }

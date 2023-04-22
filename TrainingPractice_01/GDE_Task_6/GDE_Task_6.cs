@@ -8,165 +8,181 @@ namespace TrainingPractice_01
 {
     internal class GDE_Task_6
     {
-        //static void Main(string[] args)
-        //{
-        //    string[,] dataTable = { { "Василий Пупкин", "президент" }, { "Кирилл Андратьев", "каменщик" } };
-        //    string[] menu = { "Добавить", "Удалить", "Посмотреть", "Выход" };
-        //    int index = 0;
+        static void Main(string[] args)
+        {
+            string[] fullName = { };
+            string[] occupation = { };
+            bool isWorking = true;
 
-        //    while (true)
-        //    {
-        //        Console.SetCursorPosition(0, 0);
-        //        Console.ResetColor();
-        //        Console.WriteLine("\t\tМеню");
+            Console.WriteLine("Добро пожаловать в базу данных!");
 
-        //        for (int i = 0; i < menu.Length; i++)
-        //        {
-        //            if (index == i)
-        //            {
-        //                Console.BackgroundColor = ConsoleColor.White;
-        //                Console.ForegroundColor = ConsoleColor.Black;
-        //            }
+            while (isWorking)
+            {
+                Console.WriteLine("Введите 1, чтобы добавить досье;");
+                Console.WriteLine("Введите 2, чтобы вывести все досье в базе данных;");
+                Console.WriteLine("Введите 3, чтобы удалить досье;");
+                Console.WriteLine("Введите 4, чтобы совершить поиск по фамилии;");
+                Console.WriteLine("Введите 5, чтобы выйти из базы данных.");
+                int task;
+                task = Convert.ToInt32(Console.ReadLine());
 
-        //            Console.WriteLine(menu[i]);
-        //            Console.ResetColor();
-        //        }
+                if (task == 1)
+                {
+                    InputAddingInfo(ref fullName, ref occupation);
+                }
+                else if (task == 2)
+                {
+                    ShowInfo(fullName, occupation);
+                }
+                else if (task == 3)
+                {
+                    InputRemovingInfo(ref fullName, ref occupation);
+                }
+                else if (task == 4)
+                {
+                    InputFindInfo(fullName, occupation);
+                }
+                else if (task == 5)
+                {
+                    Exit(isWorking = false);
+                }
+                else
+                {
+                    Console.WriteLine("Неверная команда.");
+                }
 
-        //        ConsoleKeyInfo userInput = Console.ReadKey(true);
+            }
+        }
 
-        //        switch (userInput.Key)
-        //        {
-        //            case ConsoleKey.UpArrow:
-        //                if (index != 0) index--;
-        //                break;
-        //            case ConsoleKey.DownArrow:
-        //                if (index != menu.Length - 1) index++;
-        //                break;
-        //            case ConsoleKey.Enter:
-        //                dataTable = SelectElementofMenu(index, dataTable);
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //}
+        static string[] AddInfo(string[] info, string newInfo)
+        {
+            string[] tempArray = new string[info.Length + 1];
 
-        //static string[,] SelectElementofMenu(int index, string[,] dataTable)
-        //{
-        //    switch (index)
-        //    {
-        //        case 0:
-        //            dataTable = AddElemetToFile(dataTable);
-        //            break;
+            for (int i = 0; i < info.Length; i++)
+            {
+                tempArray[i] = info[i];
+            }
 
-        //        case 1:
-        //            ShowElementfromFile(dataTable);
-        //            Console.SetCursorPosition(0, 6);
-        //            Console.Write("Введите номер сотрудника, которого вы хотите удалить: ");
-        //            int indexToDelete = Convert.ToInt32(Console.ReadLine());
-        //            dataTable = DeleteElementfromFile(dataTable, indexToDelete);
-        //            break;
-        //        case 2:
-        //            ShowElementfromFile(dataTable);
-        //            break;
-        //        case 3:
-        //            Console.Clear();
-        //            Environment.Exit(0);
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //    return dataTable;
-        //}
-        //static string[,] AddElemetToFile(string[,] array)        //Добавление сотрудника в досье
-        //{
-        //    ClearArea();
+            info = tempArray;
+            info[info.Length - 1] = newInfo;
+            return info;
+        }
 
-        //    Console.Write("Добавление досье.\nВведите имя: ");
-        //    string name = Console.ReadLine();
+        static void InputAddingInfo(ref string[] fullName, ref string[] occupation)
+        {
+            string newFullName;
+            string newOccupation;
 
-        //    Console.Write("Введите должность: ");
-        //    string post = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Введите ФИО сотрудника: ");
+            newFullName = Console.ReadLine();
+            fullName = AddInfo(fullName, newFullName);
+            Console.WriteLine("Введите должность сотрудника: ");
+            newOccupation = Console.ReadLine();
+            occupation = AddInfo(occupation, newOccupation);
+            Console.WriteLine("Досье добавлено! Нажмите любую кнопку, чтобы продолжить.");
+            Console.ReadKey();
+            Console.Clear();
+        }
 
-        //    string[,] tempArray = new string[array.GetLength(0) + 1, array.GetLength(1)];
+        static void ShowInfo(string[] fullName, string[] occupation)
+        {
+            Console.Clear();
+            int personNumber = 0;
 
-        //    for (int i = 0; i < array.GetLength(0); i++)
-        //    {
-        //        for (int j = 0; j < array.GetLength(1); j++)
-        //        {
-        //            tempArray[i, j] = array[i, j];
-        //        }
-        //    }
+            for (int i = 0; i < fullName.Length; i++)
+            {
+                personNumber++;
+                Console.WriteLine($"{personNumber}. {fullName[i]} - {occupation[i]};");
+            }
 
-        //    array = tempArray;
+            Console.WriteLine("Это вся имеющаяся информация о сотрудниках в базе данных.");
+            Console.WriteLine("Нажмите любую клавишу, чтобы продолжить.");
+            Console.ReadKey();
+            Console.Clear();
+        }
 
-        //    array[array.GetLength(0) - 1, 0] = name;
+        static string[] RemoveInfo(string[] info, int removeIndex)
+        {
+            string[] tempArray = new string[info.Length - 1];
 
-        //    array[array.GetLength(0) - 1, 1] = post;
+            for (int i = 0; i < removeIndex; i++)
+            {
+                tempArray[i] = info[i];
+            }
 
-        //    ShowMessage($"Вы добавили {name} - {post} успешно", ConsoleColor.Yellow);
-        //    return array;
-        //}
+            for (int i = removeIndex; i < tempArray.Length; i++)
+            {
+                tempArray[i] = info[i + 1];
+            }
 
-        //static string[,] DeleteElementfromFile(string[,] array, int index)
-        //{
-        //    index -= 1;
-        //    if (index > 0 && index < array.GetLength(0))
-        //    {
-        //        string[,] tempArray = new string[array.GetLength(0) - 1, array.GetLength(1)];
+            info = tempArray;
+            return info;
+        }
 
-        //        for (int i = 0; i < index; i++)
-        //        {
-        //            for (int j = 0; j < array.GetLength(1); j++)
-        //            {
-        //                tempArray[i, j] = array[i, j];
-        //            }
-        //        }
+        static void InputRemovingInfo(ref string[] fullName, ref string[] occupation)
+        {
+            int removeIndex;
 
-        //        for (int i = index; i < tempArray.GetLength(0); i++)
-        //        {
-        //            for (int j = 0; j < array.GetLength(1); j++)
-        //            {
-        //                tempArray[i, j] = array[i + 1, j];
-        //            }
-        //        }
+            Console.Clear();
+            Console.WriteLine("Введите номер досье, который хотите удалить.");
+            removeIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+            fullName = RemoveInfo(fullName, removeIndex);
+            occupation = RemoveInfo(occupation, removeIndex);
+            Console.WriteLine("Досье было удалено! Нажмите любую кнопку, чтобы продолжить.");
+            Console.ReadKey();
+            Console.Clear();
+        }
 
-        //        ShowMessage($"Вы успешно удалили {array[array.GetLength(0) - 1, 0]} - {array[array.GetLength(0) - 1, 1]}", ConsoleColor.Yellow);
-        //        array = tempArray;
-        //    }
 
-        //    else ShowMessage("Вы выбрали не существующий элемент");
+        static void FindInfo(string[] fullName, string[] occupation, string findInfo)
+        {
+            int personNumber = 0;
+            bool wasFound = false;
+            string foundFullName;
 
-        //    return array;
-        //}
+            for (int i = 0; i < fullName.Length; i++)
+            {
+                personNumber++;
 
-        //static void ShowElementfromFile(string[,] dataTable)
-        //{
-        //    ClearArea();
-        //    Console.WriteLine("Список сотрудников");
-        //    for (int i = 0; i < dataTable.GetLength(0); i++)
-        //    {
-        //        Console.WriteLine((i + 1) + "." + dataTable[i, 0] + " - " + dataTable[i, 1]);
-        //    }
-        //}
+                if (fullName[i] == findInfo)
+                {
+                    string foundOccupation = occupation[i];
+                    foundFullName = fullName[i];
+                    Console.WriteLine("Доступна следующая информация:");
+                    Console.WriteLine($"Сотрудник {foundFullName} находится в базе данных под номером {personNumber} и занимает должность {foundOccupation}.");
+                    wasFound = true;
+                }
+                else
+                {
+                    continue;
+                }
+            }
 
-        //static void ShowMessage(string message, ConsoleColor color = ConsoleColor.Red)
-        //{
-        //    ClearArea();
-        //    Console.SetCursorPosition(0, 6);
-        //    Console.ForegroundColor = color;
-        //    Console.WriteLine(message + "\t\t\t\t\t");
-        //    Console.ResetColor();
-        //}
-        //static void ClearArea(int x = 0, int y = 6)
-        //{
-        //    Console.SetCursorPosition(x, y);
-        //    for (int i = 0; i < 15; i++)
-        //    {
-        //        Console.ResetColor();
-        //        Console.WriteLine("\t\t\t\t\t\t\t\t");
-        //    }
-        //    Console.SetCursorPosition(x, y);
-        //}
+            if (wasFound == false)
+            {
+                Console.WriteLine("Запрашиваемая информация отсутствует в базе данных.");
+            }
+        }
+
+        static void InputFindInfo(string[] fullName, string[] occupation)
+        {
+            string findInfo;
+
+            Console.Clear();
+            Console.WriteLine("Введите ФИО сотрудника, досье которого хотите найти.");
+            findInfo = Console.ReadLine();
+            FindInfo(fullName, occupation, findInfo);
+            Console.WriteLine("Нажмите любую кнопку, чтобы продолжить.");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        static bool Exit(bool isWorking)
+        {
+            Console.Clear();
+            Console.WriteLine("Работа программы завершена!");
+            return isWorking;
+        }
     }
 }
